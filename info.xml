@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <extension key="clonecontrib" type="module">
   <file>clonecontrib</file>
-  <name>FIXME</name>
-  <description>FIXME</description>
+  <name>Clone Contributions</name>
+  <description>Provides an API for cloning an existing contribution to a new one.</description>
   <license>GPL-3.0</license>
   <maintainer>
     <author>Allen Shaw</author>
     <email>allen@JoineryHQ.com</email>
   </maintainer>
   <urls>
-    <url desc="Main Extension Page">http://FIXME</url>
-    <url desc="Documentation">http://FIXME</url>
-    <url desc="Support">http://FIXME</url>
+    <url desc="Main Extension Page">https://github.com/twomice/civicrm-clonecontrib</url>
+    <url desc="Documentation">https://twomice.github.io/civicrm-clonecontrib/</url>
+    <url desc="Support">https://github.com/twomice/civicrm-clonecontrib/issues</url>
     <url desc="Licensing">http://www.gnu.org/licenses/gpl-3.0.html</url>
   </urls>
   <releaseDate>2019-09-09</releaseDate>
@@ -20,7 +20,7 @@
   <compatibility>
     <ver>4.7</ver>
   </compatibility>
-  <comments>This is a new, undeveloped module</comments>
+  <comments>Developed by Joinery for Korlon and TriMet.</comments>
   <civix>
     <namespace>CRM/Clonecontrib</namespace>
   </civix>
