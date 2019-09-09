@@ -4,6 +4,28 @@ require_once 'clonecontrib.civix.php';
 use CRM_Clonecontrib_ExtensionUtil as E;
 
 /**
+ * Implements hook_civicrm_permission()
+ *
+ * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_permission
+ */
+function clonecontrib_civicrm_permission(&$permissions) {
+  $prefix = ts('CiviContribute') . ': '; // name of extension or module
+  $permissions['clone contributions'] = $prefix . ts('clone contributions');
+}
+
+/**
+ * Implements hook_civicrm_alterAPIPermissions()
+ *
+ * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_alterAPIPermissions
+ */
+function clonecontrib_civicrm_alterAPIPermissions($entity, $action, &$params, &$permissions) {
+  if (CRM_Core_Permission::check('administer CiviCRM')) {
+    return;
+  }
+  $permissions['contribution']['clone'] = 'clone contributions';
+}
+
+/**
  * Implements hook_civicrm_config().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_config
