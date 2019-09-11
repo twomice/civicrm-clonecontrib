@@ -26,6 +26,23 @@ function clonecontrib_civicrm_alterAPIPermissions($entity, $action, &$params, &$
 }
 
 /**
+ * Implements hook_civicrm_links()
+ *
+ * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_links
+ */
+function clonecontrib_civicrm_links($op, $objectName, $objectId, &$links, &$mask, &$values) {
+  if ($op == 'contribution.selector.row' && $objectName == 'Contribution') {
+    $links[] = array(
+      'name' => ts('Clone'),
+      'url' => 'civicrm/clonecontrib/clone',
+      'qs' => 'id=%%id%%&cid=%%cid%%&context=%%cxt%%',
+      'title' => 'Clone contribution',
+      'class' => 'small-popup',
+    );
+  }
+}
+
+/**
  * Implements hook_civicrm_config().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_config
