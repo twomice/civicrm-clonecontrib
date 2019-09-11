@@ -41,18 +41,26 @@ class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
       CRM_Core_Session::setStatus($message, E::ts('API Error'), 'error');
       return;
     }
-    $newId = $contribution['values'][0]['id'];
-    if (!$newId) {
-      dsm($contribution, '$contribution but no ID');
+    $newContribution = CRM_Utils_Array::value(0, $contribution['values']);
+    if (!$newContribution) {
       $message = E::ts('Unknown error; could not determine ID of cloned contribution.');
       CRM_Core_Session::setStatus($message, E::ts('Unknown error'), 'error');
       return;
     }
 
-    $message = E::ts('The new contribution has an ID of %1.', array(
-      1 => $newId,
+    $message = E::ts('The new contribution has been created with an ID of %1. Edit it here as needed.', array(
+      1 => CRM_Utils_Array::value('id', $newContribution),
     ));
-    CRM_Core_Session::setStatus($message, E::ts('Contribution cloned'), 'success');
+    CRM_Core_Session::setStatus($message, E::ts('Contribution cloned'), 'info', array('expires' => 0));
+
+    CRM_Utils_System::redirect(CRM_Utils_System::url('civicrm/contact/view/contribution', array(
+      'reset' => '1',
+      'action' => 'update',
+      'id' => CRM_Utils_Array::value('id', $newContribution),
+      'cid' => CRM_Utils_Array::value('contact_id', $newContribution),
+      'context' => 'contribution',
+    )));
+
 
     parent::postProcess();
   }

@@ -37,7 +37,6 @@ function clonecontrib_civicrm_links($op, $objectName, $objectId, &$links, &$mask
       'url' => 'civicrm/clonecontrib/clone',
       'qs' => 'id=%%id%%&cid=%%cid%%&context=%%cxt%%',
       'title' => 'Clone contribution',
-      'class' => 'small-popup',
     );
   }
 }
