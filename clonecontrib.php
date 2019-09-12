@@ -183,19 +183,39 @@ function clonecontrib_civicrm_preProcess($formName, &$form) {
 
 } // */
 
+
+/**
+ * For an array of menu items, recursively get the value of the greatest navID
+ * attribute.
+ * @param <type> $menu
+ * @param <type> $max_navID
+ */
+function _clonecontrib_get_max_navID(&$menu, &$max_navID = NULL) {
+  foreach ($menu as $id => $item) {
+    if (!empty($item['attributes']['navID'])) {
+      $max_navID = max($max_navID, $item['attributes']['navID']);
+    }
+    if (!empty($item['child'])) {
+      _clonecontrib_get_max_navID($item['child'], $max_navID);
+    }
+  }
+}
+
 /**
  * Implements hook_civicrm_navigationMenu().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_navigationMenu
- *
+ */
 function clonecontrib_civicrm_navigationMenu(&$menu) {
-  _clonecontrib_civix_insert_navigation_menu($menu, 'Mailings', array(
-    'label' => E::ts('New subliminal message'),
-    'name' => 'mailing_subliminal_message',
-    'url' => 'civicrm/mailing/subliminal',
-    'permission' => 'access CiviMail',
-    'operator' => 'OR',
-    'separator' => 0,
+  _clonecontrib_get_max_navID($menu, $max_navID);
+  _clonecontrib_civix_insert_navigation_menu($menu, 'Administer/CiviContribute', array(
+    'label' => E::ts('CloneContrib Settings'),
+    'name' => 'CloneContrib Settings',
+    'url' => 'civicrm/admin/clonecontrib/settings',
+    'permission' => 'administer CiviCRM',
+    'operator' => 'AND',
+    'separator' => NULL,
+    'navID' => ++$max_navID,
   ));
   _clonecontrib_civix_navigationMenu($menu);
-} // */
+}

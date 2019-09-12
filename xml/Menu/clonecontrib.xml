@@ -6,4 +6,10 @@
     <title>Contribution_Clone</title>
     <access_arguments>access CiviCRM</access_arguments>
   </item>
+  <item>
+    <path>civicrm/admin/clonecontrib/settings</path>
+    <page_callback>CRM_Clonecontrib_Form_Settings</page_callback>
+    <title>Settings</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
 </menu>

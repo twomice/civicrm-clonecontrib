@@ -28,10 +28,10 @@ function civicrm_api3_contribution_Clone($params) {
     $params['api.ContributionSoft.get'] = array();
   }
 
-  // For some reason, api is sometimes not returning all fields when 'return'
-  // parameter is absent; but we want them all since we're cloning. So, use
-  // getfields api to get all available fields and explicitly ask for them
-  // in 'return'.
+  // For some reason, Contribution api is sometimes not returning all fields
+  // when 'return' parameter is absent; but we want them all since we're cloning.
+  // So, use getfields api to get all available fields and explicitly ask for
+  // them in 'return'.
   $result = civicrm_api3('Contribution', 'getfields', [
     'api_action' => "get",
   ]);
