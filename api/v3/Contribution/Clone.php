@@ -56,6 +56,18 @@ function civicrm_api3_contribution_Clone($params) {
     }
     $newContribution['invoice_id'] = NULL;
 
+    // Remove properties that should be excluded in cloning, per user config.
+    $result = civicrm_api3('setting', 'get', array(
+      'return' => ['clonecontrib_skipped_fields'],
+      'sequential' => 1,
+    ));
+    if ($values = CRM_Utils_Array::value(0, $result['values'])) {
+      $skippedFields = $values['clonecontrib_skipped_fields'];
+      foreach ($skippedFields as $skippedField) {
+        unset($newContribution[$skippedField]);
+      }
+    }
+
     $returnValues[] = civicrm_api3('contribution', 'create', $newContribution);
   }
   return civicrm_api3_create_success($returnValues, $params, 'Contribution', 'clone');
