@@ -210,6 +210,8 @@ class CRM_Clonecontrib_Form_Settings extends CRM_Core_Form {
       $options[$id] = $value['title'];
     }
     asort($options);
+    $options['clonecontrib_all_soft_credits'] = '(' . E::ts('All soft credits') . ')';
+
     // The Contribution.clone API will force certain fields to be cloned or
     // omitted, so we don't ask the user about these.
     unset($options['id']);

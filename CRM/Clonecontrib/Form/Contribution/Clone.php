@@ -51,7 +51,7 @@ class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
     $message = E::ts('The new contribution has been created with an ID of %1. Edit it here as needed.', array(
       1 => CRM_Utils_Array::value('id', $newContribution),
     ));
-    CRM_Core_Session::setStatus($message, E::ts('Contribution cloned'), 'info', array('expires' => 0));
+    CRM_Core_Session::setStatus($message, E::ts('Contribution cloned'), 'info');
 
     CRM_Utils_System::redirect(CRM_Utils_System::url('civicrm/contact/view/contribution', array(
       'reset' => '1',

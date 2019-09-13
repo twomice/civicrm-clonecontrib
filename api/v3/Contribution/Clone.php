@@ -24,6 +24,16 @@ function _civicrm_api3_contribution_Clone_spec(&$spec) {
  * @throws API_Exception
  */
 function civicrm_api3_contribution_Clone($params) {
+  // Get properties that should be excluded in cloning, per user config.
+  $skippedFields = array();
+  $result = civicrm_api3('setting', 'get', array(
+    'return' => ['clonecontrib_skipped_fields'],
+    'sequential' => 1,
+  ));
+  if ($values = CRM_Utils_Array::value(0, $result['values'])) {
+    $skippedFields = $values['clonecontrib_skipped_fields'];
+  }
+
   if (empty($params['api.ContributionSoft.get'])) {
     $params['api.ContributionSoft.get'] = array();
   }
@@ -43,30 +53,28 @@ function civicrm_api3_contribution_Clone($params) {
     $newContribution['id'] = NULL;
     $newContribution['contribution_id'] = NULL;
     $newContribution['receive_date'] = CRM_Utils_Date::currentDBDate($timeStamp);
-    if ($newContribution['api.ContributionSoft.get']['count']) {
-      $newContribution['api.ContributionSoft.create'] = $newContribution['api.ContributionSoft.get']['values'];
-      foreach ($newContribution['api.ContributionSoft.create'] as &$value) {
-        $value['id'] = NULL;
-        $value['contribution_id'] = '$value.id';
+
+    // If we're not configured to skip them, clone soft credits too.
+    if (!in_array('clonecontrib_all_soft_credits', $skippedFields)) {
+      if ($newContribution['api.ContributionSoft.get']['count']) {
+        $newContribution['api.ContributionSoft.create'] = $newContribution['api.ContributionSoft.get']['values'];
+        foreach ($newContribution['api.ContributionSoft.create'] as &$value) {
+          $value['id'] = NULL;
+          $value['contribution_id'] = '$value.id';
+        }
       }
-      $newContribution['api.ContributionSoft.get'] = NULL;
-      $newContribution['soft_credit'] = NULL;
-      $newContribution['soft_credit_to'] = NULL;
-      $newContribution['soft_credit_id'] = NULL;
     }
+    $newContribution['api.ContributionSoft.get'] = NULL;
+    $newContribution['soft_credit'] = NULL;
+    $newContribution['soft_credit_to'] = NULL;
+    $newContribution['soft_credit_id'] = NULL;
+
     $newContribution['invoice_id'] = NULL;
 
-    // Remove properties that should be excluded in cloning, per user config.
-    $result = civicrm_api3('setting', 'get', array(
-      'return' => ['clonecontrib_skipped_fields'],
-      'sequential' => 1,
-    ));
-    if ($values = CRM_Utils_Array::value(0, $result['values'])) {
-      $skippedFields = $values['clonecontrib_skipped_fields'];
-      foreach ($skippedFields as $skippedField) {
-        unset($newContribution[$skippedField]);
-      }
+    foreach ($skippedFields as $skippedField) {
+      unset($newContribution[$skippedField]);
     }
+
 
     $returnValues[] = civicrm_api3('contribution', 'create', $newContribution);
   }
