@@ -41,7 +41,6 @@ class CRM_Clonecontrib_Upgrader extends CRM_Clonecontrib_Upgrader_Base {
     // Get settings this extension and set them all to NULL; you'd think core
     // would do this automatically upon uninstall, but it doesn't. So we do it
     // here.
-    $settings = CRM_Clonecontrib_Form_Settings::getSettings();
     _clonecontrib_civix_civicrm_alterSettingsFolders($settingsDirectories);
     foreach ($settingsDirectories as $settingsDirectory) {
       foreach (_clonecontrib_civix_glob($settingsDirectory . '/*.setting.php') as $file) {
