@@ -3,7 +3,7 @@
   <item>
     <path>civicrm/clonecontrib/clone</path>
     <page_callback>CRM_Clonecontrib_Form_Contribution_Clone</page_callback>
-    <title>Contribution_Clone</title>
+    <title>Clone Contribution</title>
     <access_arguments>access CiviCRM</access_arguments>
   </item>
   <item>
