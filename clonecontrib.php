@@ -1,10 +1,11 @@
 <?php
 
 require_once 'clonecontrib.civix.php';
+
 use CRM_Clonecontrib_ExtensionUtil as E;
 
 /**
- * Implements hook_civicrm_permission()
+ * Implements hook_civicrm_permission().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_permission
  */
@@ -14,7 +15,7 @@ function clonecontrib_civicrm_permission(&$permissions) {
 }
 
 /**
- * Implements hook_civicrm_alterAPIPermissions()
+ * Implements hook_civicrm_alterAPIPermissions().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_alterAPIPermissions
  */
@@ -26,7 +27,7 @@ function clonecontrib_civicrm_alterAPIPermissions($entity, $action, &$params, &$
 }
 
 /**
- * Implements hook_civicrm_links()
+ * Implements hook_civicrm_links().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_links
  */
@@ -179,10 +180,9 @@ function clonecontrib_civicrm_entityTypes(&$entityTypes) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_preProcess
  *
-function clonecontrib_civicrm_preProcess($formName, &$form) {
+  function clonecontrib_civicrm_preProcess($formName, &$form) {
 
-} // */
-
+  } // */
 
 /**
  * For an array of menu items, recursively get the value of the greatest navID

@@ -1,4 +1,5 @@
 <?php
+
 use CRM_Clonecontrib_ExtensionUtil as E;
 
 /**
@@ -74,7 +75,6 @@ function civicrm_api3_contribution_Clone($params) {
     foreach ($skippedFields as $skippedField) {
       unset($newContribution[$skippedField]);
     }
-
 
     $returnValues[] = civicrm_api3('contribution', 'create', $newContribution);
   }

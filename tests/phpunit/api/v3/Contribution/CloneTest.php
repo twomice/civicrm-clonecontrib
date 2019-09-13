@@ -17,8 +17,8 @@ class api_v3_Contribution_CloneTest extends \PHPUnit_Framework_TestCase implemen
    */
   public function setUpHeadless() {
     return \Civi\Test::headless()
-      ->installMe(__DIR__)
-      ->apply();
+        ->installMe(__DIR__)
+        ->apply();
   }
 
   /**
@@ -40,10 +40,11 @@ class api_v3_Contribution_CloneTest extends \PHPUnit_Framework_TestCase implemen
    * Simple example test case.
    *
    * Note how the function name begins with the word "test".
-  
-  public function testApiExample() {
+
+    public function testApiExample() {
     $result = civicrm_api3('Contribution', 'Clone', array('magicword' => 'sesame'));
     $this->assertEquals('Twelve', $result['values'][12]['name']);
-  }
-  */
+    }
+   */
+
 }

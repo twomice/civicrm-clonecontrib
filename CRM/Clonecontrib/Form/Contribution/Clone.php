@@ -22,19 +22,20 @@ class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
       ],
     ]);
 
-   parent::buildQuickForm();
+    parent::buildQuickForm();
   }
 
   public function postProcess() {
     $id = CRM_Utils_Request::retrieve('id', 'Alphanumeric', $this);
     if (!$id) {
-     CRM_Core_Session::setStatus(E::ts('Please specify a contribution to clone.'), E::ts('Error'), 'error');
-     return;
+      CRM_Core_Session::setStatus(E::ts('Please specify a contribution to clone.'), E::ts('Error'), 'error');
+      return;
     }
 
     try {
       $contribution = civicrm_api3('Contribution', 'clone', array('id' => $id));
-    } catch (CiviCRM_API3_Exception $e) {
+    }
+    catch (CiviCRM_API3_Exception $e) {
       $message = E::ts('Could not clone; Contribution.clone API error: %1.', array(
         1 => $e->getMessage(),
       ));
@@ -60,7 +61,6 @@ class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
       'cid' => CRM_Utils_Array::value('contact_id', $newContribution),
       'context' => 'contribution',
     )));
-
 
     parent::postProcess();
   }
