@@ -210,7 +210,7 @@ function clonecontrib_civicrm_navigationMenu(&$menu) {
   _clonecontrib_get_max_navID($menu, $max_navID);
   _clonecontrib_civix_insert_navigation_menu($menu, 'Administer/CiviContribute', array(
     'label' => E::ts('CloneContrib Settings'),
-    'name' => 'CloneContrib Settings',
+    'name' => 'Clone Settings',
     'url' => 'civicrm/admin/clonecontrib/settings',
     'permission' => 'administer CiviCRM',
     'operator' => 'AND',
