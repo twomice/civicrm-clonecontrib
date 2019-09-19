@@ -217,7 +217,6 @@ class CRM_Clonecontrib_Form_Settings extends CRM_Core_Form {
     unset($options['id']);
     unset($options['contact_id']);
     unset($options['financial_type_id']);
-    unset($options['total_amount']);
     unset($options['receive_date']);
     unset($options['invoice_id']);
     return $options;

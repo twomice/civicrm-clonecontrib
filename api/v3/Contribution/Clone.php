@@ -76,6 +76,10 @@ function civicrm_api3_contribution_Clone($params) {
       unset($newContribution[$skippedField]);
     }
 
+    // If total_amount is missing (which must be because it was in $skippedFields),
+    // define it as zero.
+    $newContribution['total_amount'] = CRM_Utils_Array::value('total_amount', $newContribution, 0);
+
     $returnValues[] = civicrm_api3('contribution', 'create', $newContribution);
   }
   return civicrm_api3_create_success($returnValues, $params, 'Contribution', 'clone');
