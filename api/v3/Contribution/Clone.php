@@ -38,6 +38,7 @@ function civicrm_api3_contribution_Clone($params) {
   if (empty($params['api.ContributionSoft.get'])) {
     $params['api.ContributionSoft.get'] = array();
   }
+  $params['api.ContributionSoft.get']['options']['limit'] = 0;
 
   // For some reason, Contribution api is sometimes not returning all fields
   // when 'return' parameter is absent; but we want them all since we're cloning.
