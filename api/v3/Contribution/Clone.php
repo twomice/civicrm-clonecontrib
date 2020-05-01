@@ -13,6 +13,7 @@ use CRM_Clonecontrib_ExtensionUtil as E;
 function _civicrm_api3_contribution_Clone_spec(&$spec) {
   $spec['id']['api.required'] = 1;
   $spec['id']['type'] = CRM_Utils_Type::T_INT;
+  $spec['setParams']['description'] = E::ts('Array of values to define in the clone(s)');
 }
 
 /**
@@ -50,8 +51,11 @@ function civicrm_api3_contribution_Clone($params) {
   $params['return'] = array_keys($result['values']);
 
   $returnValues = array();
+  $setParams = $params['setParams'];
+  unset($params['setParams']);
   $contributions = civicrm_api3('contribution', 'get', $params);
   foreach ($contributions['values'] as $newContribution) {
+    $newContribution = array_merge($newContribution, $setParams);
     $newContribution['id'] = NULL;
     $newContribution['contribution_id'] = NULL;
     $newContribution['receive_date'] = CRM_Utils_Date::currentDBDate($timeStamp);
@@ -71,7 +75,10 @@ function civicrm_api3_contribution_Clone($params) {
     $newContribution['soft_credit_to'] = NULL;
     $newContribution['soft_credit_id'] = NULL;
 
+    // These values must be unique per contribution, so in a clone, we have to unset them:
     $newContribution['invoice_id'] = NULL;
+    $newContribution['trxn_id'] = NULL;
+    $newContribution['creditnote_id'] = NULL;
 
     foreach ($skippedFields as $skippedField) {
       unset($newContribution[$skippedField]);
