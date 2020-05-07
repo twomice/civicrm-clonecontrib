@@ -56,7 +56,7 @@ function civicrm_api3_contribution_Clone($params) {
   $contributions = civicrm_api3('contribution', 'get', $params);
   foreach ($contributions['values'] as $newContribution) {
     $cloneSourceId = $newContribution['id'];
-    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId, starting.". $cloneSourceId);
+    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId, starting.");
     Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId; setParams: ", $setParams);
     $newContribution = array_merge($newContribution, $setParams);
     $newContribution['id'] = NULL;
