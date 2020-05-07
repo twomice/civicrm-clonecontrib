@@ -55,6 +55,9 @@ function civicrm_api3_contribution_Clone($params) {
   unset($params['setParams']);
   $contributions = civicrm_api3('contribution', 'get', $params);
   foreach ($contributions['values'] as $newContribution) {
+    $cloneSourceId = $newContribution['id'];
+    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId, starting.". $cloneSourceId);
+    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId; setParams: ", $setParams);
     $newContribution = array_merge($newContribution, $setParams);
     $newContribution['id'] = NULL;
     $newContribution['contribution_id'] = NULL;
@@ -70,7 +73,7 @@ function civicrm_api3_contribution_Clone($params) {
         }
       }
     }
-    $newContribution['api.ContributionSoft.get'] = NULL;
+    unset($newContribution['api.ContributionSoft.get']);
     $newContribution['soft_credit'] = NULL;
     $newContribution['soft_credit_to'] = NULL;
     $newContribution['soft_credit_id'] = NULL;
@@ -88,7 +91,11 @@ function civicrm_api3_contribution_Clone($params) {
     // define it as zero.
     $newContribution['total_amount'] = CRM_Utils_Array::value('total_amount', $newContribution, 0);
 
-    $returnValues[] = civicrm_api3('contribution', 'create', $newContribution);
+    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId; new values to save: ", $newContribution);
+    $contributionCreate = civicrm_api3('contribution', 'create', $newContribution);
+    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId; saved contribution values: ", $contributionCreate);
+    // $contributionCreate['values'] should have only one array element. Get that value.
+    $returnValues[] = array_shift($contributionCreate['values']);
   }
   return civicrm_api3_create_success($returnValues, $params, 'Contribution', 'clone');
 }
