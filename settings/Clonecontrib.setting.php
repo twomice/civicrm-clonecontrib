@@ -15,6 +15,6 @@ return array(
     'title' => E::ts('Skipped contribution properties'),
     'html_type' => 'CheckBox',
     'quick_form_type' => 'Element',
-    'X_options_callback' => 'CRM_Clonecontrib_Form_Settings::getSkippedFieldOptions',
+    'X_options_callback' => 'CRM_Clonecontrib_Util::getSkippedFieldOptions',
   ),
 );

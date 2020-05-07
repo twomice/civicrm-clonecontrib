@@ -13,8 +13,8 @@ use CRM_Clonecontrib_ExtensionUtil as E;
  */
 class CRM_Clonecontrib_Form_Settings extends CRM_Core_Form {
 
-  static $settingFilter = array('group' => 'clonecontrib');
-  static $extensionName = 'clonecontrib';
+  private static $settingFilter = array('group' => 'clonecontrib');
+  private static $extensionName = 'clonecontrib';
   private $_submittedValues = array();
   private $_settings = array();
 
@@ -198,28 +198,6 @@ class CRM_Clonecontrib_Form_Settings extends CRM_Core_Form {
       }
     }
     return $ret;
-  }
-
-  public static function getSkippedFieldOptions() {
-    $options = array();
-    $result = civicrm_api3('Contribution', 'getfields', [
-      'api_action' => "",
-    ]);
-
-    foreach ($result['values'] as $id => $value) {
-      $options[$id] = $value['title'];
-    }
-    asort($options);
-    $options['clonecontrib_all_soft_credits'] = '(' . E::ts('All soft credits') . ')';
-
-    // The Contribution.clone API will force certain fields to be cloned or
-    // omitted, so we don't ask the user about these.
-    unset($options['id']);
-    unset($options['contact_id']);
-    unset($options['financial_type_id']);
-    unset($options['receive_date']);
-    unset($options['invoice_id']);
-    return $options;
   }
 
   public function getSettingOptions($setting) {

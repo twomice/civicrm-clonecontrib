@@ -64,18 +64,18 @@ class CRM_Clonecontrib_Upgrader extends CRM_Clonecontrib_Upgrader_Base {
     public function disable() {
     }
 
-    /**
-   * Example: Run a couple simple queries.
+  /**
+   * Example: Flush caches, because settings have changed. (If site admin has
+   * simply changed files to the latest version, we need to trigger this).
    *
    * @return TRUE on success
    * @throws Exception
-   *
-    public function upgrade_4200() {
-    $this->ctx->log->info('Applying update 4200');
-    CRM_Core_DAO::executeQuery('UPDATE foo SET bar = "whiz"');
-    CRM_Core_DAO::executeQuery('DELETE FROM bang WHERE willy = wonka(2)');
+   */
+  public function upgrade_4200() {
+    CRM_Core_Invoke::rebuildMenuAndCaches();
     return TRUE;
-    } // */
+  }
+
   /**
    * Example: Run an external SQL script.
    *
