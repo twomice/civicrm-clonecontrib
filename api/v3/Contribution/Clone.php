@@ -26,10 +26,8 @@ function _civicrm_api3_contribution_Clone_spec(&$spec) {
  * @throws API_Exception
  */
 function civicrm_api3_contribution_Clone($params) {
-  Civi::log()->debug("CloneContrib: contribution.clone start, with params: ", $params);
   // Get properties that should be excluded in cloning, per user config.
   $skippedFields = CRM_Clonecontrib_Util::getSetting('clonecontrib_skipped_fields');
-  Civi::log()->debug("CloneContrib: configured skippedFields: ", $skippedFields);
 
   if (empty($params['api.ContributionSoft.get'])) {
     $params['api.ContributionSoft.get'] = array();
@@ -44,16 +42,14 @@ function civicrm_api3_contribution_Clone($params) {
     'api_action' => "get",
   ]);
   $params['return'] = array_keys($result['values']);
-  Civi::log()->debug("CloneContrib: fetching source contribution with contribution.get params:", $params);
 
   $returnValues = array();
   $setParams = $params['setParams'];
   unset($params['setParams']);
+
   $contributions = civicrm_api3('contribution', 'get', $params);
   foreach ($contributions['values'] as $newContribution) {
     $cloneSourceId = $newContribution['id'];
-    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId, starting.");
-    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId: source contribution as retrieved:", $newContribution);
     $newContribution['id'] = NULL;
     $newContribution['contribution_id'] = NULL;
     $newContribution['receive_date'] = CRM_Utils_Date::currentDBDate($timeStamp);
@@ -79,21 +75,15 @@ function civicrm_api3_contribution_Clone($params) {
     $newContribution['creditnote_id'] = NULL;
 
     foreach ($skippedFields as $skippedField) {
-      Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId; unsetting skippedField: $skippedField");
       unset($newContribution[$skippedField]);
     }
-    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId; contribution values after removing skippedFields: ", $newContribution);
-    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId; setParams: ", $setParams);
     $newContribution = array_merge($newContribution, $setParams);
-    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId; source contribution, after array_merge with setParams: ", $newContribution);
 
     // If total_amount is missing (which must be because it was in $skippedFields),
     // define it as zero.
     $newContribution['total_amount'] = CRM_Utils_Array::value('total_amount', $newContribution, 0);
 
-    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId; new values to save: ", $newContribution);
     $contributionCreate = civicrm_api3('contribution', 'create', $newContribution);
-    Civi::log()->debug("CloneContrib: Cloning contribution $cloneSourceId; saved contribution values: ", $contributionCreate);
     // $contributionCreate['values'] should have only one array element. Get that value.
     $returnValues[] = array_shift($contributionCreate['values']);
   }
