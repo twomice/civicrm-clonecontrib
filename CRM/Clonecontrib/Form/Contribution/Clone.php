@@ -8,6 +8,7 @@ use CRM_Clonecontrib_ExtensionUtil as E;
  * @see https://wiki.civicrm.org/confluence/display/CRMDOC/QuickForm+Reference
  */
 class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
+
   public function buildQuickForm() {
     $contributionStatusOptions = CRM_Contribute_BAO_Contribution::buildOptions('contribution_status_id');
     $this->add(
@@ -31,32 +32,6 @@ class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
     $this->assign('elementNames', ['contribution_status_id']);
     parent::buildQuickForm();
   }
-
-  /**
-   * This virtual function is used to set the default values of various form elements.
-   *
-   * @return array|NULL
-   *   reference to the array of default values
-   */
-  public function setDefaultValues() {
-    $id = CRM_Utils_Request::retrieve('id', 'Alphanumeric', $this);
-    if (!$id) {
-      CRM_Core_Session::setStatus(E::ts('Please specify a contribution to clone.'), E::ts('Error'), 'error');
-      return;
-    }
-    try {
-      $contribution = civicrm_api3('Contribution', 'getSingle', array('id' => $id));
-    }
-    catch (CiviCRM_API3_Exception $e) {
-      $message = E::ts('Could not get contribution; Contribution.getSingle API error: %1.', array(
-        1 => $e->getMessage(),
-      ));
-      CRM_Core_Session::setStatus($message, E::ts('API Error'), 'error');
-      return;
-    }
-    return $contribution;
-  }
-
 
   public function postProcess() {
     $id = CRM_Utils_Request::retrieve('id', 'Alphanumeric', $this);
