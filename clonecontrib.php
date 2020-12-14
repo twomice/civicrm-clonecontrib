@@ -10,7 +10,8 @@ use CRM_Clonecontrib_ExtensionUtil as E;
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_permission
  */
 function clonecontrib_civicrm_permission(&$permissions) {
-  $prefix = E::ts('CiviContribute') . ': '; // name of extension or module
+  // name of extension or module
+  $prefix = E::ts('CiviContribute') . ': ';
   $permissions['clone contributions'] = $prefix . E::ts('clone contributions');
 }
 
@@ -180,9 +181,9 @@ function clonecontrib_civicrm_entityTypes(&$entityTypes) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_preProcess
  *
-  function clonecontrib_civicrm_preProcess($formName, &$form) {
-
-  } // */
+ * function clonecontrib_civicrm_preProcess($formName, &$form) {
+ * }
+ */
 
 /**
  * For an array of menu items, recursively get the value of the greatest navID
