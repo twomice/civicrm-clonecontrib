@@ -10,8 +10,8 @@ use CRM_Clonecontrib_ExtensionUtil as E;
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_permission
  */
 function clonecontrib_civicrm_permission(&$permissions) {
-  $prefix = ts('CiviContribute') . ': '; // name of extension or module
-  $permissions['clone contributions'] = $prefix . ts('clone contributions');
+  $prefix = E::ts('CiviContribute') . ': '; // name of extension or module
+  $permissions['clone contributions'] = $prefix . E::ts('clone contributions');
 }
 
 /**
@@ -34,7 +34,7 @@ function clonecontrib_civicrm_alterAPIPermissions($entity, $action, &$params, &$
 function clonecontrib_civicrm_links($op, $objectName, $objectId, &$links, &$mask, &$values) {
   if ($op == 'contribution.selector.row' && $objectName == 'Contribution') {
     $links[] = array(
-      'name' => ts('Clone'),
+      'name' => E::ts('Clone'),
       'url' => 'civicrm/clonecontrib/clone',
       'qs' => 'id=%%id%%&cid=%%cid%%&context=%%cxt%%',
       'title' => 'Clone contribution',

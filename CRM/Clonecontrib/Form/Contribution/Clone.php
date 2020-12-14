@@ -20,13 +20,13 @@ class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
     $this->addButtons([
       [
         'type' => 'next',
-        'name' => ts('Clone'),
+        'name' => E::ts('Clone'),
         'spacing' => '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
         'isDefault' => TRUE,
       ],
       [
         'type' => 'cancel',
-        'name' => ts('Cancel'),
+        'name' => E::ts('Cancel'),
       ],
     ]);
     $this->assign('elementNames', ['contribution_status_id']);
