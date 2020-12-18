@@ -8,6 +8,7 @@ use CRM_Clonecontrib_ExtensionUtil as E;
  * @author as
  */
 class CRM_Clonecontrib_Util {
+
   public static function getSetting($settingName) {
     $result = civicrm_api3('setting', 'get', array(
       'return' => [$settingName],
@@ -45,4 +46,5 @@ class CRM_Clonecontrib_Util {
     unset($options['contribution_status_id']);
     return $options;
   }
+
 }

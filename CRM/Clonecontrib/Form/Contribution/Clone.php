@@ -12,21 +12,25 @@ class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
   public function buildQuickForm() {
     $contributionStatusOptions = CRM_Contribute_BAO_Contribution::buildOptions('contribution_status_id');
     $this->add(
-      'Select', // field type
-      'contribution_status_id', // field name
-      E::ts('Contribution Status'), // field label
-      $contributionStatusOptions, NULL //, $setting['html_attributes']
+      // field type
+      'Select',
+      // field name
+      'contribution_status_id',
+      // field label
+      E::ts('Contribution Status'),
+      //, $setting['html_attributes']
+      $contributionStatusOptions, NULL
     );
     $this->addButtons([
       [
         'type' => 'next',
-        'name' => ts('Clone'),
+        'name' => E::ts('Clone'),
         'spacing' => '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
         'isDefault' => TRUE,
       ],
       [
         'type' => 'cancel',
-        'name' => ts('Cancel'),
+        'name' => E::ts('Cancel'),
       ],
     ]);
     $this->assign('elementNames', ['contribution_status_id']);
