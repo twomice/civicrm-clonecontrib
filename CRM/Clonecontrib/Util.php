@@ -14,7 +14,7 @@ class CRM_Clonecontrib_Util {
       'return' => [$settingName],
       'sequential' => 1,
     ));
-    $settingValue = $result['values'][0][$settingName];
+    $settingValue = $result['values'][0][$settingName] ?? [];
 
     if ($settingName == 'clonecontrib_skipped_fields') {
       $validOptionKeys = array_keys(self::getSkippedFieldOptions());
