@@ -167,7 +167,7 @@ class CRM_Clonecontrib_Form_Settings extends CRM_Core_Form {
     // checkboxes need flipping because all values are '1' instead of the key.
     foreach ($values as $key => &$value) {
       $setting = CRM_Utils_Array::value($key, $settings, FALSE);
-      if ('CheckBox' == CRM_Utils_Array::value('html_type', $setting)) {
+      if ('CheckBox' == $setting['html_type'] ?? NULL) {
         $value = array_keys($value);
       }
     }
@@ -193,13 +193,13 @@ class CRM_Clonecontrib_Form_Settings extends CRM_Core_Form {
         'return' => array_keys($this->_settings),
         'sequential' => 1,
       ));
-      $ret = CRM_Utils_Array::value(0, $result['values']);
+      $ret = $result['values'][0] ?? NULL;
 
       // checkboxes need flipping because all values are '1' instead of the key.
       $settings = $this->_settings;
       foreach ($ret as $key => &$value) {
         $setting = CRM_Utils_Array::value($key, $settings, FALSE);
-        if ('CheckBox' == CRM_Utils_Array::value('html_type', $setting)) {
+        if ('CheckBox' == $setting['html_type'] ?? NULL) {
           $value = array_fill_keys(array_values($value), '1');
         }
       }
