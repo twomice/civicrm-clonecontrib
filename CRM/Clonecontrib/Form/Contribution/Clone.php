@@ -59,7 +59,7 @@ class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
     try {
       $contribution = civicrm_api3('Contribution', 'clone', $contributionParams);
     }
-    catch (CiviCRM_API3_Exception $e) {
+    catch (CRM_Core_Exception $e) {
       $message = E::ts('Could not clone; Contribution.clone API error: %1.', array(
         1 => $e->getMessage(),
       ));
