@@ -79,8 +79,8 @@ By default, all properties are copied (except for Invoice ID, which must be uniq
 
 
 ## Support
-Paid support is available for urgent fixes or large; occasional free support for
-easy bug fixes and "great ideas I like and have time for". Very likely to answer
-questions about what's possible and to provide pointers if you have any trouble.
-For any of the above, please create a ticket in the
-[issue queue](https://github.com/twomice/civicrm-clonecontrib/issues).
+
+Support for this package is handled under Joinery's ["As-Is Support" policy](https://joineryhq.com/software-support-levels#as-is-support).
+
+Public issue queue for this package: 
+https://github.com/twomice/civicrm-clonecontrib/issues
