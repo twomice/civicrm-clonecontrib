@@ -12,7 +12,10 @@ use CRM_Clonecontrib_ExtensionUtil as E;
 function clonecontrib_civicrm_permission(&$permissions) {
   // name of extension or module
   $prefix = E::ts('CiviContribute') . ': ';
-  $permissions['clone contributions'] = $prefix . E::ts('clone contributions');
+  $permissions['clone contributions'] = [
+    'label' => $prefix . E::ts('clone contributions'),
+    'description' => '',
+  ];
 }
 
 /**
