@@ -30,7 +30,7 @@ function civicrm_api3_contribution_Clone($params) {
   $skippedFields = CRM_Clonecontrib_Util::getSetting('clonecontrib_skipped_fields');
 
   if (empty($params['api.ContributionSoft.get'])) {
-    $params['api.ContributionSoft.get'] = array();
+    $params['api.ContributionSoft.get'] = [];
   }
   $params['api.ContributionSoft.get']['options']['limit'] = 0;
 
@@ -43,7 +43,7 @@ function civicrm_api3_contribution_Clone($params) {
   ]);
   $params['return'] = array_keys($result['values']);
 
-  $returnValues = array();
+  $returnValues = [];
   $setParams = $params['setParams'];
   unset($params['setParams']);
 

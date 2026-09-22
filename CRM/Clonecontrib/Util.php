@@ -10,10 +10,10 @@ use CRM_Clonecontrib_ExtensionUtil as E;
 class CRM_Clonecontrib_Util {
 
   public static function getSetting($settingName) {
-    $result = civicrm_api3('setting', 'get', array(
+    $result = civicrm_api3('setting', 'get', [
       'return' => [$settingName],
       'sequential' => 1,
-    ));
+    ]);
     $settingValue = $result['values'][0][$settingName];
 
     if ($settingName == 'clonecontrib_skipped_fields') {
@@ -25,7 +25,7 @@ class CRM_Clonecontrib_Util {
   }
 
   public static function getSkippedFieldOptions() {
-    $options = array();
+    $options = [];
     $result = civicrm_api3('Contribution', 'getfields', [
       'api_action' => "",
     ]);

@@ -2,8 +2,8 @@
 
 use CRM_Clonecontrib_ExtensionUtil as E;
 
-return array(
-  'clonecontrib_skipped_fields' => array(
+return [
+  'clonecontrib_skipped_fields' => [
     'group_name' => 'Clonecontrib Settings',
     'group' => 'clonecontrib',
     'name' => 'clonecontrib_skipped_fields',
@@ -16,5 +16,5 @@ return array(
     'html_type' => 'CheckBox',
     'quick_form_type' => 'Element',
     'X_options_callback' => 'CRM_Clonecontrib_Util::getSkippedFieldOptions',
-  ),
-);
+  ],
+];
