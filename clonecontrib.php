@@ -37,12 +37,12 @@ function clonecontrib_civicrm_alterAPIPermissions($entity, $action, &$params, &$
  */
 function clonecontrib_civicrm_links($op, $objectName, $objectId, &$links, &$mask, &$values) {
   if ($op == 'contribution.selector.row' && $objectName == 'Contribution') {
-    $links[] = array(
+    $links[] = [
       'name' => E::ts('Clone'),
       'url' => 'civicrm/clonecontrib/clone',
       'qs' => 'id=%%id%%&cid=%%cid%%&context=%%cxt%%',
       'title' => 'Clone contribution',
-    );
+    ];
   }
 }
 
@@ -108,7 +108,7 @@ function _clonecontrib_get_max_navID(&$menu, &$max_navID = NULL) {
  */
 function clonecontrib_civicrm_navigationMenu(&$menu) {
   _clonecontrib_get_max_navID($menu, $max_navID);
-  _clonecontrib_civix_insert_navigation_menu($menu, 'Administer/CiviContribute', array(
+  _clonecontrib_civix_insert_navigation_menu($menu, 'Administer/CiviContribute', [
     'label' => E::ts('CloneContrib Settings'),
     'name' => 'Clone Settings',
     'url' => 'civicrm/admin/clonecontrib/settings',
@@ -116,6 +116,6 @@ function clonecontrib_civicrm_navigationMenu(&$menu) {
     'operator' => 'AND',
     'separator' => NULL,
     'navID' => ++$max_navID,
-  ));
+  ]);
   _clonecontrib_civix_navigationMenu($menu);
 }

@@ -46,7 +46,7 @@ class CRM_Clonecontrib_Upgrader extends CRM_Extension_Upgrader_Base {
       foreach (_clonecontrib_civix_glob($settingsDirectory . '/*.setting.php') as $file) {
         $settings = include $file;
         foreach ($settings as $key => $setting) {
-          civicrm_api3('setting', 'create', array($key => NULL));
+          civicrm_api3('setting', 'create', [$key => NULL]);
         }
       }
     }

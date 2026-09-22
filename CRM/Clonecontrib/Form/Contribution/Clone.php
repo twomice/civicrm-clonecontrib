@@ -43,7 +43,7 @@ class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
       CRM_Core_Session::setStatus(E::ts('Please specify a contribution to clone.'), E::ts('Error'), 'error');
       return;
     }
-    $contributionParams = array('id' => $id);
+    $contributionParams = ['id' => $id];
 
     $formValues = $this->exportValues();
     $contributionGetFields = civicrm_api3('Contribution', 'getfields', [
@@ -60,9 +60,9 @@ class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
       $contribution = civicrm_api3('Contribution', 'clone', $contributionParams);
     }
     catch (CRM_Core_Exception $e) {
-      $message = E::ts('Could not clone; Contribution.clone API error: %1.', array(
+      $message = E::ts('Could not clone; Contribution.clone API error: %1.', [
         1 => $e->getMessage(),
-      ));
+      ]);
       CRM_Core_Session::setStatus($message, E::ts('API Error'), 'error');
       return;
     }
@@ -73,18 +73,18 @@ class CRM_Clonecontrib_Form_Contribution_Clone extends CRM_Core_Form {
       return;
     }
 
-    $message = E::ts('The new contribution has been created with an ID of %1. Edit it here as needed.', array(
+    $message = E::ts('The new contribution has been created with an ID of %1. Edit it here as needed.', [
       1 => $newContribution['id'] ?? NULL,
-    ));
+    ]);
     CRM_Core_Session::setStatus($message, E::ts('Contribution cloned'), 'info');
 
-    CRM_Utils_System::redirect(CRM_Utils_System::url('civicrm/contact/view/contribution', array(
+    CRM_Utils_System::redirect(CRM_Utils_System::url('civicrm/contact/view/contribution', [
       'reset' => '1',
       'action' => 'update',
       'id' => $newContribution['id'] ?? NULL,
       'cid' => $newContribution['contact_id'] ?? NULL,
       'context' => 'contribution',
-    )));
+    ]));
 
     parent::postProcess();
   }
