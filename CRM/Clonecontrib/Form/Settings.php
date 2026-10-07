@@ -1,7 +1,5 @@
 <?php
 
-require_once 'CRM/Core/Form.php';
-
 use CRM_Clonecontrib_ExtensionUtil as E;
 
 /**
